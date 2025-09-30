@@ -76,7 +76,7 @@ namespace api.Controller
             var stockModel = await _stockRepo.DeleteAsync(id);
             if (stockModel == null)
             {
-                return NotFound();
+                return NotFound("Stock does not exist");
             }
             return NoContent();
         }
