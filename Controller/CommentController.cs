@@ -25,11 +25,13 @@ namespace api.Controller
         [HttpGet]
         public async Task<IActionResult> GetAll()
         {
+            
+
             var comments = await _commentRepo.GetAllAsync(); // Async için baştan yazıp seçtim referans için using geldi
             var commentsDto = comments.Select(s => s.ToCommentDto());
             return Ok(commentsDto);
         }
-        [HttpGet("{id}")]
+        [HttpGet("{id:int}")]
         public async Task<IActionResult> GetById([FromRoute] int id)
         {
             var comment = await _commentRepo.GetByIdAsync(id);
@@ -39,7 +41,7 @@ namespace api.Controller
             }
             return Ok(comment.ToCommentDto());
         }
-        [HttpPost("{stockId}")]
+        [HttpPost("{stockId:int}")]
 
         public async Task<IActionResult> Create([FromRoute] int stockId, CreateCommentDto commentDto)
         {
@@ -52,7 +54,7 @@ namespace api.Controller
             return CreatedAtAction(nameof(GetById), new { id = commentModel.Id }, commentModel.ToCommentDto());
         }
         [HttpPut]
-        [Route("{id}")]
+        [Route("{id:int}")]
 
         public async Task<IActionResult> Update([FromRoute] int id, [FromBody] UpdateCommentRequestDto updateDto)
         {
@@ -66,7 +68,7 @@ namespace api.Controller
             return Ok(comment);
         }
         [HttpDelete]
-        [Route("{id}")]
+        [Route("{id:int}")]
         public async Task<IActionResult> Delete([FromRoute] int id)
         {
             var commentModel = await _commentRepo.DeleteAsync(id);
