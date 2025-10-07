@@ -34,7 +34,7 @@ namespace api.Controller
         public async Task<IActionResult> GetAll([FromQuery] QueryObject query)
         {
             var stocks = await _stockRepo.GetAllAsync(query); // Async için baştan yazıp seçtim referans için using geldi
-            var stocksDto = stocks.Select(s => s.ToStockDto());
+            var stocksDto = stocks.Select(s => s.ToStockDto()).ToList();
             return Ok(stocksDto);
         }
         [HttpGet("{id:int}")]
