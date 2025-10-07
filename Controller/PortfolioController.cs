@@ -85,7 +85,7 @@ namespace api.Controller
 
             var filteredStock = userPortfolio.Where(s => s.Symbol.ToLower() == symbol.ToLower()).ToList();
 
-            if (filteredStock.Count() == 1)
+            if (filteredStock.Any())
             {
                 await _portfolioRepo.DeletePortfolio(appUser, symbol);
             }
