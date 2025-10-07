@@ -25,4 +25,10 @@ public class CollectApiController : ControllerBase
 
         return Ok(stocks);
     }
+    [HttpPost("save")]
+public async Task<IActionResult> SaveStocks()
+{
+    await _collectApiService.SaveBorsaStocksToDatabaseAsync();
+    return Ok("Borsa verileri veritabanına kaydedildi.");
+}
 }

@@ -9,5 +9,6 @@ namespace api.Interfaces
     public interface ICollectApiService
     {
         Task<List<StockInfo>> GetStocksAsync();
+        Task SaveBorsaStocksToDatabaseAsync();
     }
 }
