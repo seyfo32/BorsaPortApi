@@ -89,11 +89,14 @@ builder.Services.AddAuthentication(options =>
 #pragma warning restore CS8604 // Possible null reference argument.
     }
 );
+builder.Services.Configure<CollectApiSettings>(builder.Configuration.GetSection("CollectApi"));
 
 builder.Services.AddScoped<IStockRepository, StockRepository>();
 builder.Services.AddScoped<ICommentRepository, CommentRepository>();
 builder.Services.AddScoped<ITokenService, TokenService>();
 builder.Services.AddScoped<IPortfolioRepository, PortfolioRepository>();
+builder.Services.AddHttpClient<ICollectApiService, CollectApiService>();
+
 var app = builder.Build();
 
 // 🔧 Sadece geliştirme ortamında Swagger UI aktif
@@ -112,3 +115,6 @@ app.MapControllers();
 
 app.Run();
 
+internal class CollectApiSettings
+{
+}
